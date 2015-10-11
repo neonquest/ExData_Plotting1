@@ -22,14 +22,11 @@ data   = read.csv(power_consumption_file, sep = ";", header = FALSE, skip = 6663
                   nrows = num_rows, na.strings = "?")
 
 names(data) = names(header)
-data$Date = as.Date(data$Date, format="%d/%m/%y")
-data$Time = strptime(data$Time, format="%H:%M:%S")
 
 data$DateTime = as.POSIXct(paste(data$Date, data$Time, sep = " "),
-                            format = "%d/%m/%y %H:%M:%S")
+                            format = "%d/%m/%Y %H:%M:%S")
 
 png(filename = "plot2.png", width = 480, height = 480)
-
 plot(data$DateTime, data$Global_active_power, type = "l", col = "black",
      main = "", xlab = "", ylab = "Global Active Power (kilowatts)")
 dev.off()
